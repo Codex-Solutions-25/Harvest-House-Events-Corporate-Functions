@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harvest House | Premier Events & Wedding Venue | Cape Winelands</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-green: #44635C; /* Elegant Green */
+            --warm-gold: #B08D57;   /* Sophisticated Warm Gold */
+            --cream: #FFF8F0;      /* Light Creamy Off-White */
+            --text-gray: #4A5568;   /* Tailwind's text-gray-700 */
+            --dark-gray: #2D3748;  /* Tailwind's text-gray-800 for headings if needed */
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-gray);
+            scroll-behavior: smooth;
+            overflow-x: hidden; /* Prevent horizontal scroll often caused by animations */
+        }
+
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.45); /* Slightly increased overlay */
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .bg-cream { background-color: var(--cream); }
+        .text-brand-green { color: var(--brand-green); }
+        .bg-brand-green { background-color: var(--brand-green); }
+        .text-warm-gold { color: var(--warm-gold); }
+        .bg-warm-gold { background-color: var(--warm-gold); }
+        .border-warm-gold { border-color: var(--warm-gold); }
+
+        /* Animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(40px); /* Slightly more pronounced */
+            transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+        }
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-in { opacity: 0; animation: fadeInAnimation 1.5s ease-in forwards; }
+        @keyframes fadeInAnimation {
+            0% { opacity: 0; transform: translateY(25px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .subtle-float { animation: subtleFloatAnimation 4s ease-in-out infinite; }
+        @keyframes subtleFloatAnimation {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); } /* Slightly more float */
+        }
+
+        /* Gallery Modal */
+        .modal { display: none; position: fixed; z-index: 1000; padding-top: 50px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.95); }
+        .modal-content { margin: auto; display: block; width: auto; max-width: 90%; max-height: 85vh; }
+        .modal-caption { margin: auto; display: block; width: 80%; max-width: 700px; text-align: center; color: #ccc; padding: 10px 0; }
+        .close-modal { position: absolute; top: 20px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; transition: 0.3s; }
+        .close-modal:hover, .close-modal:focus { color: #bbb; text-decoration: none; cursor: pointer; }
+        .gallery-grid img { transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; }
+        .gallery-grid img:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        
+        /* Accordion for packages */
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; }
+        .package-card { border: 1px solid #e2e8f0; border-radius: 0.5rem; padding: 1.5rem; margin-bottom: 1rem; background-color: white; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03); }
+        .package-title { font-size: 1.25rem; font-weight: 600; color: var(--brand-green); }
+        .package-price { font-size: 1.1rem; color: var(--warm-gold); font-weight: 500; }
+        .package-details li { margin-bottom: 0.3rem; }
+
+        /* Custom button style for "View Details" on packages if needed */
+        .details-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--brand-green);
+            color: white;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        .details-button:hover {
+            background-color: #38524B; /* Darker shade of brand-green */
+        }
+
+    </style>
+</head>
+<body class="bg-white">
+
+    <header class="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
+        <video autoplay loop muted playsinline class="absolute z-0 w-auto min-w-full min-h-full max-w-none">
+            <source src="Videos/hero.mp4" type="video/mp4"> Your browser does not support the video tag.
+        </video>
+        <div class="hero-video-overlay"></div>
+        <div class="hero-content px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight fade-in" style="animation-delay: 0.2s;">
+                Transform Your Event Into Something Extraordinary
+            </h1>
+            <p class="mt-6 text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto fade-in" style="animation-delay: 0.7s;">
+                Experience unforgettable weddings and corporate events with natural elegance in the Cape Winelands.
+            </p>
+            <div class="mt-10 fade-in" style="animation-delay: 1.2s;">
+                <a href="#contact" class="inline-block bg-warm-gold text-white text-lg font-semibold px-10 py-4 rounded-md shadow-lg hover:bg-opacity-90 transition duration-300 transform hover:scale-105">
+                    Book Your Viewing
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-16 sm:py-24 bg-cream">
+        <div class="container mx-auto px-6 lg:px-8 max-w-4xl text-center">
+            <h2 class="text-3xl sm:text-4xl font-bold text-brand-green mb-6 scroll-reveal">
+                Seeking a Truly Special Setting for Your Big Day or Key Event?
+            </h2>
+            <p class="text-lg sm:text-xl mb-4 scroll-reveal" data-delay="100">
+                Planning a wedding or corporate function can feel overwhelming. You're searching for more than just a venue; you want a place that understands your vision, offers a beautiful backdrop, and helps you "banish the year’s accumulated stress."
+            </p>
+            <p class="text-lg sm:text-xl scroll-reveal" data-delay="200">
+                It's challenging to find that unique blend of elegance, natural beauty, and dedicated service that makes an event truly memorable, whether it's saying "I do" or "thank you for all the hard work."
+            </p>
+        </div>
+    </section>
+
+    <section class="py-16 sm:py-24 bg-white">
+        <div class="container mx-auto px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-3/4 lg:pr-12 mb-8 lg:mb-0 scroll-reveal">
+                    <img src="Images/placeholder-3.jpg" alt="Harvest House Gardens and Views" class="rounded-lg shadow-xl subtle-float">
+                </div>
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-brand-green mb-6 scroll-reveal">
+                        Welcome to Harvest House: Where Your Vision Blossoms
+                    </h2>
+                    <p class="text-lg sm:text-xl mb-4 scroll-reveal" data-delay="100">
+                        Picture your celebration unfolding in manicured gardens with breath-taking Helderberg mountain views. Imagine your guests mingling across rolling lawns, through lavender fields, beside a tranquil dam—all surrounded by verdant vineyards and unforgettable sunsets.
+                    </p>
+                    <p class="text-lg sm:text-xl mb-4 scroll-reveal" data-delay="200">
+                        Whether you're saying "I do" or "thank you," you'll create memories that last a lifetime in this stunning wine estate setting between Stellenbosch and Paarl. Your special moment deserves this perfect backdrop, with versatile indoor and outdoor spaces accommodating up to 150 guests.
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 sm:py-24 bg-cream">
+        <div class="container mx-auto px-6 lg:px-8">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-brand-green scroll-reveal">
+                    Discover the Charm of Harvest House
+                </h2>
+                <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto scroll-reveal" data-delay="100">
+                    More than just a venue, we offer an experience woven into the natural beauty of the Cape Winelands.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center p-6 scroll-reveal" data-delay="0">
+                    <img src="Images/manicured-gardens-and-lawns.jpg" alt="Manicured Gardens" class="w-full h-48 object-cover rounded-lg shadow-md mb-6 mx-auto">
+                    <h3 class="text-2xl font-semibold text-warm-gold mb-3">Manicured Gardens & Lawns</h3>
+                    <p>Stroll through our immaculate gardens and enjoy the serenity of rolling lawns, perfect for outdoor ceremonies and elegant receptions.</p>
+                </div>
+                <div class="text-center p-6 scroll-reveal" data-delay="150">
+                    <img src="Images/fields-of-lavender.jpg" alt="Lavender Fields" class="w-full h-48 object-cover rounded-lg shadow-md mb-6 mx-auto">
+                    <h3 class="text-2xl font-semibold text-warm-gold mb-3">Fields of Lavender</h3>
+                    <p>Our enchanting fields of lavender provide a unique, fragrant, and visually stunning backdrop for your photos and guest experience.</p>
+                </div>
+                <div class="text-center p-6 scroll-reveal" data-delay="300">
+                    <img src="Images/breathtaking-views.jpg" alt="Helderberg Mountain Views" class="w-full h-48 object-cover rounded-lg shadow-md mb-6 mx-auto">
+                    <h3 class="text-2xl font-semibold text-warm-gold mb-3">Breathtaking Views</h3>
+                    <p>Enjoy unforgettable views over the Helderberg mountain range, especially during our memorable sunsets – a truly magical setting.</p>
+                </div>
+                <div class="text-center p-6 scroll-reveal" data-delay="450">
+                    <img src="Images/versatile-spaces.jpg" alt="Versatile Event Spaces" class="w-full h-48 object-cover rounded-lg shadow-md mb-6 mx-auto">
+                    <h3 class="text-2xl font-semibold text-warm-gold mb-3">Versatile Spaces</h3>
+                    <p>Choose from stunning outdoor garden settings or our cozy, well-appointed indoor function hall, accommodating up to 150 guests.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="py-16 sm:py-24 bg-white">
+        <div class="container mx-auto px-6 lg:px-8">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center text-brand-green mb-12 scroll-reveal">
+                Our Offerings Tailored For You
+            </h2>
+            <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-10">
+                <div class="space-y-8">
+                    <div class="package-card scroll-reveal">
+                        <h3 class="package-title mb-3">Venue Only Option</h3>
+                        <p class="text-sm mb-3">Includes projector, screen, flip chart, tables, white chairs. Tea/Coffee @ R190pp.</p>
+                        <ul class="list-disc list-inside text-sm package-details">
+                            <li>Up to 20 pax: R 1500</li>
+                            <li>Up to 30 pax: R 2500</li>
+                            <li>Up to 40 pax: R 3500</li>
+                            <li>Up to 50 pax: R 4500</li>
+                            <li>Up to 60 pax: R 5500</li>
+                            <li>Up to 70 pax: R 6500</li>
+                            <li>Up to 80 pax: R 7500</li>
+                            <li>Up to 90 pax: R 8500</li>
+                            <li>Up to 100-150 pax: R 9500</li>
+                        </ul>
+                        <p class="text-xs mt-2">Evening Venue Doubles from day function. Open Monday to Sunday.</p>
+                    </div>
+
+                    <div class="package-card scroll-reveal" data-delay="100">
+                        <h3 class="package-title mb-3">Seminar Packages</h3>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-md text-warm-gold">Half-Day (8am-1pm) @ R350 pp</h4>
+                            <p class="text-sm">Tea/Coffee, breakfast mini muffins, sandwiches, pastries. Includes equipment. Venue hire included.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-md text-warm-gold">Full-Day (8am-5pm) @ R590 pp</h4>
+                            <p class="text-sm">As above + Light Meal (lasagna & salad) & afternoon tea/coffee. Includes equipment. Venue hire included.</p>
+                        </div>
+                    </div>
+
+                    <div class="package-card scroll-reveal" data-delay="200">
+                        <h3 class="package-title mb-3">Corporate/Office Functions @ R450 pp</h3>
+                        <p class="text-sm mb-2">For 30-150 pax. Halaal/Kosher & Vegetarian options available.</p>
+                        <p class="text-sm mb-2">Choose: 3 meat braai OR buffet OR plated meal, with salads and desserts.</p>
+                        <ul class="list-disc list-inside text-sm package-details">
+                            <li>Harvest Table (extra snacks & pre-drinks): + R150 pp</li>
+                            <li>Tea/Coffee & Equipment: + R50 pp</li>
+                            <li>Wine Tasting: + R100 pp</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <div class="package-card scroll-reveal" data-delay="300">
+                        <h3 class="package-title mb-3">Wedding Celebrations</h3>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-md text-warm-gold">Intimate Day Weddings</h4>
+                            <ul class="list-disc list-inside text-sm package-details">
+                                <li>Up to 30 guests: R 5000</li>
+                                <li>Up to 60 guests: R 10 000</li>
+                                <li>Up to 150 guests: R 20 000</li>
+                            </ul>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-md text-warm-gold">Petite Package @ R19 800 (Day)</h4>
+                            <p class="text-sm">Suitable for up to 60 people. Venue & lawn, cutlery, crockery, tables, bar glassware.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-md text-warm-gold">Sweet Spot Package</h4>
+                            <ul class="list-disc list-inside text-sm package-details">
+                                <li>R37 400 (High Season Weekend)</li>
+                                <li>R26 400 (Weekday)</li>
+                            </ul>
+                            <p class="text-sm mt-1">Suitable for 60-120 people. Venue & lawn, cutlery, crockery, bar glassware, tables.</p>
+                        </div>
+                        <a href="mailto:weddings@harvest-house.co.za" class="details-button mt-4">Email for Wedding Details & Quotes</a>
+                    </div>
+                    
+                    <div class="package-card scroll-reveal" data-delay="400">
+                        <h3 class="package-title mb-3">Fun & Engaging Activities</h3>
+                        <p class="text-md mb-2">Add some extra fun to your event for just <strong>R100 per person</strong> (for all listed games).</p>
+                        <ul class="grid grid-cols-2 gap-2 text-sm package-details">
+                            <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-warm-gold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Boules</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-warm-gold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Giant Jenga</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-warm-gold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Wine Tasting</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-warm-gold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Table Riddle</li>
+                        </ul>
+                        <img src="Images/Activities/giant-jenga.jpg" alt="Event Games at Harvest House" class="w-full h-32 object-cover rounded-md mt-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 sm:py-24 bg-cream">
+        <div class="container mx-auto px-6 lg:px-8 text-center">
+            <h2 class="text-3xl sm:text-4xl font-bold text-brand-green mb-12 scroll-reveal">
+                Moments at Harvest House
+            </h2>
+            <div class="gallery-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                <div class="aspect-square overflow-hidden rounded-lg scroll-reveal" data-delay="0">
+                    <img src="Images/gallery-1.jpg" alt="Gallery Image 1" class="w-full h-full object-cover cursor-pointer" onclick="openModal(this)">
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg scroll-reveal" data-delay="100">
+                    <img src="Images/gallery-2.jpg" alt="Gallery Image 2" class="w-full h-full object-cover cursor-pointer" onclick="openModal(this)">
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg scroll-reveal" data-delay="200">
+                    <img src="Images/gallery-3.jpg" alt="Gallery Image 3" class="w-full h-full object-cover cursor-pointer" onclick="openModal(this)">
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg scroll-reveal" data-delay="300">
+                    <img src="Images/gallery-4.jpg" alt="Gallery Image 4" class="w-full h-full object-cover cursor-pointer" onclick="openModal(this)">
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg scroll-reveal" data-delay="400">
+                    <img src="Images/gallery-5.jpg" alt="Gallery Image 5" class="w-full h-full object-cover cursor-pointer" onclick="openModal(this)">
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg scroll-reveal" data-delay="400">
+                    <img src="Images/gallery-6.jpg" alt="Gallery Image 6" class="w-full h-full object-cover cursor-pointer" onclick="openModal(this)">
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg scroll-reveal" data-delay="500">
+                    <img src="Images/gallery-7.jpg" alt="Gallery Image 7" class="w-full h-full object-cover cursor-pointer" onclick="openModal(this)">
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg scroll-reveal" data-delay="500">
+                    <img src="Images/gallery-8.jpg" alt="Gallery Image 8" class="w-full h-full object-cover cursor-pointer" onclick="openModal(this)">
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg scroll-reveal" data-delay="600">
+                    <img src="Images/gallery-9.jpg" alt="Gallery Image 9" class="w-full h-full object-cover cursor-pointer" onclick="openModal(this)">
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg scroll-reveal" data-delay="600">
+                    <img src="Images/gallery-10.jpg" alt="Gallery Image 10" class="w-full h-full object-cover cursor-pointer" onclick="openModal(this)">
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg scroll-reveal" data-delay="800">
+                    <img src="Images/gallery-11.jpg" alt="Gallery Image 11" class="w-full h-full object-cover cursor-pointer" onclick="openModal(this)">
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg scroll-reveal" data-delay="800">
+                    <img src="Images/gallery-12.jpg" alt="Gallery Image 12" class="w-full h-full object-cover cursor-pointer" onclick="openModal(this)">
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <div id="galleryModal" class="modal" onclick="closeModalOnClickOutside(event)">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div id="modalCaption" class="modal-caption"></div>
+    </div>
+
+    <section class="py-16 sm:py-24 bg-white">
+        <div class="container mx-auto px-6 lg:px-8 max-w-5xl">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center text-brand-green mb-12 scroll-reveal">
+                Hear What Our Guests Say
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+                <div class="bg-cream p-8 rounded-lg shadow-lg scroll-reveal" data-delay="0">
+                    <p class="text-lg italic mb-4">"Everything was perfect from the ceremony to the amazing lunch. Our guests would not stop raving about everything. Our day was so special and we will always be grateful."</p>
+                    <p class="font-semibold text-warm-gold">- Micaela & Dylan Schoor</p>
+                </div>
+                <div class="bg-cream p-8 rounded-lg shadow-lg scroll-reveal" data-delay="150">
+                    <p class="text-lg italic mb-4">"We had a lovely Christmas lunch under the trees. The venue is beautiful and the food delicious."</p>
+                    <p class="font-semibold text-warm-gold">- Cherry Groenewald</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 sm:py-32 bg-cover bg-center bg-brand-green" style="background-image: linear-gradient(rgba(68, 99, 92, 0.85), rgba(68, 99, 92, 0.85)), url('https://images.unsplash.com/photo-1483085400998-464804639560?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');">
+        <div class="container mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="text-white">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 scroll-reveal">
+                        Ready to Host Your Perfect Event?
+                    </h2>
+                    <p class="text-lg sm:text-xl text-gray-200 mb-4 scroll-reveal" data-delay="150">
+                        We look forward to hosting your next event at Harvest House! Viewing of the venue is by appointment only.
+                    </p>
+                    <p class="text-lg sm:text-xl text-gray-200 mb-8 scroll-reveal" data-delay="250">
+                        Fill in the form, or contact us directly to discuss your wedding, corporate function, or seminar. Let's make it unforgettable.
+                    </p>
+                     <div class="space-y-3 text-gray-100 scroll-reveal" data-delay="350">
+                        <p><strong>Email:</strong> <a href="mailto:booking@harvest-house.co.za" class="hover:text-warm-gold">booking@harvest-house.co.za</a></p>
+                        <p><strong>Weddings Email:</strong> <a href="mailto:weddings@harvest-house.co.za" class="hover:text-warm-gold">weddings@harvest-house.co.za</a></p>
+                        <p><strong>WhatsApp:</strong> <a href="https://wa.me/27645379855" target="_blank" class="hover:text-warm-gold">064 537 9855</a></p>
+                        <p><strong>Address:</strong> De Meye Wines - Corner of Old Paarl Road (R101) and Muldersvlei Road, Cape Winelands, Cape Town, South Africa</p>
+                    </div>
+                </div>
+                <div class="bg-white p-8 sm:p-10 rounded-lg shadow-2xl scroll-reveal" data-delay="200">
+                    <h3 class="text-2xl font-bold text-brand-green mb-6 text-center">Discuss Your Event</h3>
+                    <form action="#" method="POST"> <div class="mb-4">
+                            <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                            <input type="text" name="name" id="name" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-warm-gold focus:border-warm-gold sm:text-sm">
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                            <input type="email" name="email" id="email" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-warm-gold focus:border-warm-gold sm:text-sm">
+                        </div>
+                         <div class="mb-4">
+                            <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number (Optional)</label>
+                            <input type="tel" name="phone" id="phone" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-warm-gold focus:border-warm-gold sm:text-sm">
+                        </div>
+                        <div class="mb-4">
+                            <label for="event_type" class="block text-sm font-medium text-gray-700">Type of Event</label>
+                            <select id="event_type" name="event_type" class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-warm-gold focus:border-warm-gold sm:text-sm">
+                                <option>Wedding</option>
+                                <option>Corporate Function</option>
+                                <option>Seminar/Conference</option>
+                                <option>Year-End Event</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-sm font-medium text-gray-700">Message / Event Details</label>
+                            <textarea id="message" name="message" rows="4" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-warm-gold focus:border-warm-gold sm:text-sm"></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-warm-gold hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-warm-gold transition duration-300">
+                                Submit Enquiry
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 sm:py-24 bg-cream">
+        <div class="container mx-auto px-6 lg:px-8 max-w-3xl">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center text-brand-green mb-12 scroll-reveal">
+                Your Questions, Answered
+            </h2>
+            <div class="space-y-8">
+                <div class="scroll-reveal" data-delay="0">
+                    <h3 class="text-xl font-semibold text-warm-gold mb-2">What is your venue's capacity?</h3>
+                    <p>Harvest House can accommodate up to 150 people indoors. We also have various stunning outdoor garden spaces suitable for different group sizes and event styles.</p>
+                </div>
+                <div class="scroll-reveal" data-delay="150">
+                    <h3 class="text-xl font-semibold text-warm-gold mb-2">What kind of events do you host?</h3>
+                    <p>We are perfect for corporate functions, seminars, end-of-year events, and of course, beautiful weddings. Our versatile spaces and packages cater to a wide range of celebrations.</p>
+                </div>
+                <div class="scroll-reveal" data-delay="300">
+                    <h3 class="text-xl font-semibold text-warm-gold mb-2">Is viewing by appointment only?</h3>
+                    <p>Yes, to ensure we can give you our undivided attention and show you everything Harvest House has to offer, viewing of the venue is by appointment only. Please contact us to schedule your visit.</p>
+                </div>
+                 <div class="scroll-reveal" data-delay="450">
+                    <h3 class="text-xl font-semibold text-warm-gold mb-2">Do you cater to dietary requirements like Halaal/Kosher?</h3>
+                    <p>Absolutely. For our Corporate/Office Functions (and often adaptable for other events), Halaal, Kosher, and Vegetarian options are available. Please discuss your specific needs with us.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 bg-brand-green text-gray-300 text-center">
+        <div class="container mx-auto px-6 lg:px-8">
+            <p class="text-lg font-semibold text-white mb-2">Harvest House @ De Meye</p>
+            <p class="mb-1">Corner of Old Paarl Road (R101) and Muldersvlei Road, Cape Winelands</p>
+            <p class="mb-1">Email: <a href="mailto:booking@harvest-house.co.za" class="hover:text-warm-gold">booking@harvest-house.co.za</a> | Weddings: <a href="mailto:weddings@harvest-house.co.za" class="hover:text-warm-gold">weddings@harvest-house.co.za</a></p>
+            <p class="mb-4">WhatsApp: <a href="https://wa.me/27645379855" target="_blank" class="hover:text-warm-gold">064 537 9855</a></p>
+            <p class="text-sm">&copy; <span id="currentYear"></span> Harvest House. All Rights Reserved. </p>
+            <p class="text-xs mt-1">Elegantly Crafted Landing Page.</p> <a href="#" id="backToTop" class="mt-4 inline-block text-sm text-warm-gold hover:text-white">Back to Top &uarr;</a>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth Scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') { // For "Back to Top"
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Scroll Reveal Animations
+        const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = parseInt(entry.target.dataset.delay) || 0;
+                    setTimeout(() => {
+                        entry.target.classList.add('revealed');
+                    }, delay);
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.05 }); // Lowered threshold slightly
+
+        scrollRevealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // Update current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Gallery Modal
+        var modal = document.getElementById("galleryModal");
+        var modalImg = document.getElementById("modalImage");
+        var captionText = document.getElementById("modalCaption");
+
+        function openModal(element) {
+            if (modal && modalImg && captionText) {
+                modal.style.display = "block";
+                modalImg.src = element.src;
+                captionText.innerHTML = element.alt;
+                document.body.style.overflow = 'hidden'; 
+            }
+        }
+
+        function closeModal() {
+            if (modal) {
+                modal.style.display = "none";
+                document.body.style.overflow = 'auto';
+            }
+        }
+        
+        function closeModalOnClickOutside(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal && modal.style.display === "block") {
+                closeModal();
+            }
+        });
+
+    </script>
+</body>
+</html>
